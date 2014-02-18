@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CalcDate</title>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0' />
 </head>
 <body>
     <form>
@@ -22,9 +23,9 @@
             var dateResult = Math.ceil((today.getTime()-date)/(one_day))
 
             if ( dateResult < 0 ) {
-                $('body').append(dateResult*-1 +" days left until " + data + " (" + Math.floor(dateResult*-1/7) + " weeks)<br />")
+                $('body').append('<strong>' + dateResult*-1 +"</strong> days left until <small>" + data + "</small> (<em>" + Math.floor(dateResult*-1/7) + " weeks</em>)<br />")
             } else {
-                $('body').append(dateResult +" days has gone by since " + data + " (" + Math.floor(dateResult/7) + " weeks)<br />")
+                $('body').append('<strong>' + dateResult +"</strong> days has gone by since <small>" + data + "</small> (<em>" + Math.floor(dateResult/7) + " weeks</em>)<br />")
             }
         }
 
@@ -33,14 +34,16 @@
 
             data = $('input').val()
 
-            if ( $('input').val().length > 10 ){
+            dataFirstTwoChars = parseInt(data.substr(0,2));
+
+            // if ( dataFirstTwoChars < 13 ){
                 date = Date.parse(data)
                 if ( lastVal != data ){
                     calcDate(date);
                     lastVal = data;
                     $('input').val('')
                 }
-            }
+            // }
 
         })
 
