@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CalcDate</title>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="New date" />
+    </form>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script>
+
+        function calcDate(date){
+            //Set the two dates
+            // var wedding = new Date(2011, 6, 31) //Month is 0-11 in JavaScript
+            today=new Date()
+            //Get 1 day in milliseconds
+            var one_day=1000*60*60*24
+
+            //Calculate difference btw the two dates, and convert to days
+            var dateResult = Math.ceil((today.getTime()-date)/(one_day))
+
+            if ( dateResult < 0 ) {
+                $('body').append(dateResult*-1 +" days left until " + data + " (" + Math.floor(dateResult*-1/7) + " weeks)<br />")
+            } else {
+                $('body').append(dateResult +" days has gone by since " + data + " (" + Math.floor(dateResult/7) + " weeks)<br />")
+            }
+        }
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+
+            data = $('input').val()
+
+            if ( $('input').val().length > 10 ){
+                date = Date.parse(data)
+                if ( lastVal != data ){
+                    calcDate(date);
+                    lastVal = data;
+                    $('input').val('')
+                }
+            }
+
+        })
+
+        var lastVal = 0;
+
+        $('input').keyup(function(e) {
+
+            var code = (e.keyCode ? e.keyCode : e.which);
+            switch(code) {
+                case 13: // enter
+                    // return false;
+                break;
+                case 38:
+                    $('input').val(lastVal)
+                break;
+            }
+
+        });
+
+        // function calcSince(date){
+        //     today = new Date();
+        //     BigDay = new Date("December 25, 2020");
+        //     msPerDay = 24 * 60 * 60 * 1000 ;
+        //     timeLeft = (BigDay.getTime() - today.getTime());
+        //     e_daysLeft = timeLeft / msPerDay;
+        //     daysLeft = Math.floor(e_daysLeft);
+        //     e_hrsLeft = (e_daysLeft - daysLeft)*24;
+        //     hrsLeft = Math.floor(e_hrsLeft);
+        //     minsLeft = Math.floor((e_hrsLeft - hrsLeft)*60);
+        //     weeks = daysLeft / 7
+        // }
+
+        // $(document).keyup(function(e) {
+        //     var code = (e.keyCode ? e.keyCode : e.which);
+        //     switch(code) {
+        //         case 13: // enter
+        //             return false;
+        //         break;
+        //     }
+        // });
+
+</script>
+</body>
+</html>
